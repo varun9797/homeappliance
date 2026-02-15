@@ -19,18 +19,20 @@ function AppContent() {
   }, []);
 
   return (
-    <>
+    <div className="min-h-screen bg-slate-50">
       <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/product/:slug" element={<ProductPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/admin/products" element={<ProtectedRoute requireAdmin><AdminProducts /></ProtectedRoute>} />
-        <Route path="/admin/categories" element={<ProtectedRoute requireAdmin><AdminCategories /></ProtectedRoute>} />
-        <Route path="/admin/users" element={<ProtectedRoute requireSuperAdmin><SuperAdminPanel /></ProtectedRoute>} />
-      </Routes>
-    </>
+      <main className="mx-auto w-full max-w-6xl px-4 py-6">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/product/:slug" element={<ProductPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/admin/products" element={<ProtectedRoute requireAdmin><AdminProducts /></ProtectedRoute>} />
+          <Route path="/admin/categories" element={<ProtectedRoute requireAdmin><AdminCategories /></ProtectedRoute>} />
+          <Route path="/admin/users" element={<ProtectedRoute requireSuperAdmin><SuperAdminPanel /></ProtectedRoute>} />
+        </Routes>
+      </main>
+    </div>
   );
 }
 

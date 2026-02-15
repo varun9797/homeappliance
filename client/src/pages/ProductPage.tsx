@@ -17,33 +17,54 @@ export default function ProductPage() {
     }
   }, [slug]);
 
-  if (loading) return <p style={{ padding: 24 }}>Loading...</p>;
-  if (!product) return <p style={{ padding: 24 }}>Product not found.</p>;
+  if (loading) return <p className="rounded-2xl border border-slate-200 bg-white p-6 text-sm text-slate-600">Loading...</p>;
+  if (!product) return <p className="rounded-2xl border border-slate-200 bg-white p-6 text-sm text-slate-600">Product not found.</p>;
 
   return (
-    <div style={{ padding: 24, maxWidth: 800, margin: "0 auto" }}>
-      <Link to="/">&larr; Back to Products</Link>
-      <h1 style={{ marginTop: 16 }}>{product.name}</h1>
-      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", margin: "16px 0" }}>
-        {product.images.map((img, i) => (
-          <img key={i} src={img} alt={product.name} style={{ width: 200, height: 200, objectFit: "cover", borderRadius: 4 }} />
-        ))}
+    <div className="space-y-6">
+      <Link to="/" className="text-sm font-semibold text-slate-600 hover:text-slate-900">&larr; Back to Products</Link>
+      <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="space-y-4">
+          <div className="grid grid-cols-2 gap-4">
+            {product.images.map((img, i) => (
+              <img
+                key={i}
+                src={img}
+                alt={product.name}
+                className="h-48 w-full rounded-2xl object-cover"
+              />
+            ))}
+          </div>
+          {product.images.length === 0 && (
+            <div className="flex h-56 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-400">
+              No images available
+            </div>
+          )}
+        </div>
+
+        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h1 className="text-2xl font-semibold text-slate-900">{product.name}</h1>
+          <p className="mt-3 text-2xl font-semibold text-slate-900">&#8377;{product.price.toLocaleString()}</p>
+          <p className="mt-4 text-sm leading-6 text-slate-600">{product.description}</p>
+          <div className="mt-6 flex flex-wrap gap-2 text-xs font-semibold text-slate-600">
+            <span className="rounded-full bg-slate-100 px-3 py-1">Warranty included</span>
+            <span className="rounded-full bg-slate-100 px-3 py-1">Verified seller</span>
+            <span className="rounded-full bg-slate-100 px-3 py-1">Easy returns</span>
+          </div>
+        </div>
       </div>
-      <p style={{ fontSize: 24, fontWeight: "bold" }}>&#8377;{product.price.toLocaleString()}</p>
-      <p style={{ lineHeight: 1.6, marginTop: 16 }}>{product.description}</p>
+
       {product.specifications && Object.keys(product.specifications).length > 0 && (
-        <div style={{ marginTop: 24 }}>
-          <h3>Specifications</h3>
-          <table style={{ borderCollapse: "collapse", width: "100%" }}>
-            <tbody>
-              {Object.entries(product.specifications).map(([key, value]) => (
-                <tr key={key} style={{ borderBottom: "1px solid #eee" }}>
-                  <td style={{ padding: 8, fontWeight: "bold" }}>{key}</td>
-                  <td style={{ padding: 8 }}>{value}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h3 className="text-lg font-semibold text-slate-900">Specifications</h3>
+          <div className="mt-4 grid gap-2">
+            {Object.entries(product.specifications).map(([key, value]) => (
+              <div key={key} className="flex justify-between border-b border-slate-100 py-2 text-sm">
+                <span className="font-medium text-slate-700">{key}</span>
+                <span className="text-slate-600">{value}</span>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

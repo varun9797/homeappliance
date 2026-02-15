@@ -24,23 +24,26 @@ export default function LoginForm() {
   }
 
   return (
-    <div style={{ maxWidth: 400, margin: "80px auto", padding: 24 }}>
-      <h1>Login</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: 16 }}>
-          <label htmlFor="email">Email</label>
+    <div className="mx-auto mt-10 w-full max-w-md rounded-3xl border border-slate-200 bg-white p-8 shadow-soft">
+      <div className="mb-6">
+        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Welcome back</p>
+        <h1 className="mt-2 text-2xl font-semibold text-slate-900">Login to your account</h1>
+      </div>
+      {error && <p className="mb-4 rounded-xl bg-red-50 px-4 py-2 text-sm text-red-600">{error}</p>}
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="space-y-2">
+          <label htmlFor="email" className="text-sm font-medium text-slate-700">Email</label>
           <input
             id="email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            style={{ display: "block", width: "100%", padding: 8, marginTop: 4 }}
+            className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 focus:border-slate-400 focus:outline-none"
           />
         </div>
-        <div style={{ marginBottom: 16 }}>
-          <label htmlFor="password">Password</label>
+        <div className="space-y-2">
+          <label htmlFor="password" className="text-sm font-medium text-slate-700">Password</label>
           <input
             id="password"
             type="password"
@@ -48,15 +51,20 @@ export default function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
             required
             minLength={6}
-            style={{ display: "block", width: "100%", padding: 8, marginTop: 4 }}
+            className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 focus:border-slate-400 focus:outline-none"
           />
         </div>
-        <button type="submit" disabled={loading} style={{ padding: "8px 24px" }}>
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-400"
+        >
           {loading ? "Logging in..." : "Login"}
         </button>
       </form>
-      <p style={{ marginTop: 16 }}>
-        Don't have an account? <Link to="/register">Register</Link>
+      <p className="mt-6 text-sm text-slate-600">
+        Don't have an account?{" "}
+        <Link className="font-semibold text-slate-900" to="/register">Register</Link>
       </p>
     </div>
   );

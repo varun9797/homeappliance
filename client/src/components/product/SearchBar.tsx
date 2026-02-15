@@ -11,15 +11,23 @@ export default function SearchBar() {
   }
 
   return (
-    <form onSubmit={handleSearch} style={{ display: "flex", gap: 8, marginBottom: 16 }}>
-      <input
-        type="text"
-        placeholder="Search products..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        style={{ padding: 8, flex: 1 }}
-      />
-      <button type="submit" style={{ padding: "8px 16px" }}>Search</button>
+    <form onSubmit={handleSearch} className="flex flex-col gap-3 md:flex-row">
+      <div className="flex flex-1 items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
+        <span className="text-slate-400">🔍</span>
+        <input
+          type="text"
+          placeholder="Search products, brands, or categories"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="w-full bg-transparent text-sm text-slate-700 outline-none"
+        />
+      </div>
+      <button
+        type="submit"
+        className="rounded-2xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
+      >
+        Search
+      </button>
     </form>
   );
 }
